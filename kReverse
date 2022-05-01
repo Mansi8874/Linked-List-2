@@ -1,0 +1,83 @@
+public class Solution {
+//     
+//     public static LinkedListNode<Integer> reverseLinkedListRec(LinkedListNode<Integer> head) {
+// 		//Your code goes here
+//         if(head==null || head.next==null){
+//             return head;
+//         }
+//         LinkedListNode<Integer> NewHead = reverseLinkedListRec(head.next);
+//         head.next.next=head;
+//         head.next=null;
+//         return NewHead;
+        
+// 	}
+
+// 	public static LinkedListNode<Integer> kReverse(LinkedListNode<Integer> head, int k) {
+// 		//Your code goes here
+//         if(head==null || head.next==null){
+//             return head;
+//         }
+//         if(k==0){
+//             return head;
+//         }
+//         LinkedListNode<Integer> h1=head;
+//         LinkedListNode<Integer> t1=head;
+        
+//         int  count=1;
+//         while(count<k && t1.next!=null){
+//              t1=t1.next;
+//             count++;
+//         }
+//         LinkedListNode<Integer> h2=t1.next;
+//         t1.next=null;
+//         LinkedListNode<Integer> temp=head;
+//         LinkedListNode<Integer> smallAns=kReverse(h2,k);
+//         LinkedListNode<Integer> h=reverseLinkedListRec(head);
+//         temp.next=smallAns;
+//         return h;
+// 	}
+    private static DoubleNode reverseLinkedListRec(LinkedListNode<Integer> head) {
+		//Your code goes here
+        if(head==null || head.next==null){
+            DoubleNode ans= new DoubleNode();
+            ans.head=head;
+            ans.tail=head;
+            return ans;
+        }
+        DoubleNode ans = reverseLinkedListRec(head.next);
+        ans.tail.next=head;
+        head.next=null;
+        ans.tail=ans.tail.next;
+        return ans;
+        
+	}
+
+	public static LinkedListNode<Integer> kReverse(LinkedListNode<Integer> head, int k) {
+		//Your code goes here
+        if(head==null || head.next==null){
+            return head;
+        }
+        if(k==0){
+            return head;
+        }
+        LinkedListNode<Integer> h1=head;
+        LinkedListNode<Integer> t1=head;
+        
+        int  count=1;
+        while(count<k && t1.next!=null){
+             t1=t1.next;
+            count++;
+        }
+        LinkedListNode<Integer> h2=t1.next;
+        t1.next=null;
+        
+        LinkedListNode<Integer> smallAns=kReverse(h2,k);
+        DoubleNode ans=reverseLinkedListRec(h1);
+        ans.tail.next=smallAns;
+        return ans.head;
+	}
+}
+class DoubleNode{
+        LinkedListNode<Integer> head;
+        LinkedListNode<Integer> tail;
+    }
