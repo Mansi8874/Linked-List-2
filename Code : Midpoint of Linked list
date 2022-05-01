@@ -1,0 +1,33 @@
+public class Solution {
+    
+    public static LinkedListNode<Integer> midPoint(LinkedListNode<Integer> head) {
+        //Your code goes here
+        if(head==null){
+            return head;
+        }
+        LinkedListNode<Integer> hare=head;
+        LinkedListNode<Integer> turtle=head;
+        while(hare.next!= null && hare.next.next != null){
+            hare=hare.next.next;
+            turtle=turtle.next;
+        }
+        return turtle;
+//         LinkedListNode<Integer> currNode=head;
+        
+//         int size=0;
+//         while(currNode != null){
+//             currNode=currNode.next;
+//             size++;
+//         }
+//         int middle=size/2;
+//         int i=0;
+//         LinkedListNode<Integer> newNode=head;
+//         while(i<middle-1){
+//                newNode=newNode.next;
+//                 i++;
+//         }
+//         return newNode;
+       
+    }
+
+}
