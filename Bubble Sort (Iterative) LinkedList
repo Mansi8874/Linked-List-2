@@ -1,0 +1,64 @@
+public class Solution {
+
+	public static LinkedListNode<Integer> bubbleSort(LinkedListNode<Integer> head) {
+		//Your code goes here
+        // if(head==null || head.next==null){
+        //     return head;
+        // }
+        // LinkedListNode<Integer> currNode=head;
+        // int size=0;
+        // while(currNode!=null){
+        //     currNode=currNode.next;
+        //     size++;
+        // }
+        // for(int i=0;i<size;i++){
+        //     LinkedListNode<Integer> newNode=head.next;
+        //    LinkedListNode<Integer> prevNode=head;
+        //     for(int j=0;j<size-1;j++){
+        //         if(prevNode.data>newNode.data){
+        //             int temp=prevNode.data;
+        //             prevNode.data=newNode.data;
+        //             newNode.data=temp;
+        //         }
+        //         prevNode=newNode;
+        //         newNode=newNode.next;
+        //     }
+        //     //prevNode.next=null;
+        // }
+        // return head;
+        if(head==null || head.next==null){
+            return head;
+        }
+        LinkedListNode<Integer> newNode=head;
+        int size=0;
+        while(newNode!=null){
+            newNode=newNode.next;
+            size++;
+        }
+        for(int i=0;i<size;i++){
+            LinkedListNode<Integer> prevNode=null;
+            LinkedListNode<Integer> currNode=head;
+            LinkedListNode<Integer> nextNode=currNode.next;
+            while(currNode.next!=null){
+                if(currNode.data>currNode.next.data){
+                    if(prevNode==null){
+                        currNode.next=nextNode.next;
+                        nextNode.next=currNode;
+                        prevNode=nextNode;
+                        head=prevNode;
+                    }else{
+                        nextNode=currNode.next;
+                        currNode.next=nextNode.next;
+                        prevNode.next=nextNode;
+                        nextNode.next=currNode;
+                        prevNode=nextNode;
+                    }
+                }else{
+                    prevNode=currNode;
+                    currNode=currNode.next;
+                }
+            }
+        }
+        return head;   
+	}
+}
